@@ -6,7 +6,7 @@
     "url": "git+https://github.com/splunk/addonfactory-ucc-generator.git",
     "directory": "ui"
   },
-  "version": "5.61.0",
+  "version": "5.61.1-38",
   "license": "Apache-2.0",
   "author": "Splunk Inc.",
   "homepage": "https://splunk.github.io/addonfactory-ucc-generator",
@@ -47,6 +47,8 @@
     "@splunk/ui-utils": "^1.8.0",
     "@splunk/visualization-context": "^27.2.1",
     "@storybook/test": "^8.6.7",
+    "@vitejs/plugin-react": "^4.3.4",
+    "glob": "^11.0.1",
     "immutability-helper": "^3.1.1",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
@@ -57,13 +59,15 @@
     "react-router-dom": "6.27.0",
     "styled-components": "^5.3.11",
     "uuid": "^11.1.0",
+    "vite": "^6.2.6",
+    "vite-plugin-checker": "^0.9.1",
     "zod": "^3.24.2"
   },
   "devDependencies": {
     "@babel/core": "^7.26.10",
     "@babel/eslint-parser": "^7.26.10",
-    "@babel/plugin-transform-runtime": "^7.26.10",
     "@babel/helper-plugin-utils": "^7.26.5",
+    "@babel/plugin-transform-runtime": "^7.26.10",
     "@babel/preset-env": "^7.26.9",
     "@babel/preset-react": "^7.26.3",
     "@kickstartds/core": "^4.1.0",
@@ -78,15 +82,16 @@
     "@storybook/addon-links": "^8.6.7",
     "@storybook/addon-webpack5-compiler-babel": "^3.0.5",
     "@storybook/blocks": "^8.6.7",
-    "@storybook/react": "^8.6.7",
-    "@storybook/react-webpack5": "^8.6.7",
     "@storybook/builder-vite": "^8.6.10",
+    "@storybook/react": "^8.6.7",
     "@storybook/react-vite": "^8.6.10",
+    "@storybook/react-webpack5": "^8.6.7",
     "@storybook/test-runner": "^0.22.0",
     "@testing-library/dom": "^8.20.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^12.1.5",
     "@testing-library/user-event": "^14.6.1",
+    "@types/glob": "^8.1.0",
     "@types/jest-image-snapshot": "^6.4.0",
     "@types/js-yaml": "^4.0.9",
     "@types/lodash": "^4.17.16",
@@ -95,7 +100,6 @@
     "@types/styled-components": "^5.1.34",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
-    "@vitejs/plugin-react": "^4.3.4",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^29.7.0",
     "babel-loader": "^8.4.1",
@@ -118,21 +122,19 @@
     "fork-ts-checker-webpack-plugin": "^9.0.2",
     "jest-image-snapshot": "^6.4.0",
     "jsdom": "^26.0.0",
+    "license-webpack-plugin": "^4.0.2",
     "msw": "2.7.3",
     "msw-storybook-addon": "^2.0.4",
-    "license-webpack-plugin": "^4.0.2",
     "prettier": "^2.8.8",
     "querystring-es3": "^0.2.1",
-    "storybook": "^8.6.7",
     "rollup-plugin-license": "^3.6.0",
+    "storybook": "^8.6.7",
     "style-loader": "^4.0.0",
     "stylelint": "^14.16.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2",
     "undici": "^5.29.0",
     "url": "^0.11.4",
-    "vite": "^6.2.3",
-    "vite-plugin-checker": "^0.9.0",
     "vite-plugin-dts": "^4.5.0",
     "vitest": "^3.0.7",
     "webpack": "^5.98.0",
@@ -142,10 +144,10 @@
   },
   "peerDependencies": {
     "react": "^16.14.0",
-    "typescript": "^5.8.2",
     "react-dom": "^16.14.0",
     "react-is": "^16.14.0",
-    "styled-components": "^5.3.11"
+    "styled-components": "^5.3.11",
+    "typescript": "^5.8.2"
   },
   "resolutions": {
     "@npmcli/git": "^2.1.0",
@@ -171,9 +173,13 @@
     ]
   },
   "files": [
-    "dist/lib"
+    "dist/lib",
+    "cli/vite.config_ucc-gen-ui.ts"
   ],
   "type": "module",
+  "bin": {
+    "ucc-gen-ui": "cli/ucc-gen-build-ui.js"
+  },
   "types": "./dist/lib/publicApi.d.ts",
   "module": "./dist/lib/index.js",
   "exports": {
