@@ -67,6 +67,7 @@ def _add_multiple_inputs(ucc_smartx_rest_helper):
             "start_date": "2016-10-10T12:10:15.000z",
             "disabled": 0,
         }
+        print("hello")
         input_page.backend_conf.post_stanza(url, kwargs)
 
 
