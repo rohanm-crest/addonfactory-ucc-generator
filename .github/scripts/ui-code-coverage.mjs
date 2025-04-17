@@ -40,7 +40,7 @@ const findTotalPercentage = (rawData) => {
 
 // @ts-check
 /** @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments */
-export default async ({ github, context }) => {
+export default async ({ github, context, core }) => {
   const prCoveragePath = "/tmp/pr-coverage.json";
   const developCoveragePath = "/tmp/develop-coverage.json";
 
